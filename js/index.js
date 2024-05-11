@@ -292,13 +292,32 @@ function reveal() {
     w = 255; h = 155;
   }
 
+  var label = document.createElement("label");
+  label.setAttribute("for", "file");
+  label.setAttribute("id", "input-file");
+
+  var input = document.createElement("input");
+  input.setAttribute("type", "file");
+  input.setAttribute("hidden", "true");
+  input.setAttribute("id", "file");
+
   var img = document.createElement("img");
-  img.setAttribute("src", "image.jpg");
+  img.setAttribute("id", "image");
+  img.setAttribute("src", "https://i0.wp.com/css-tricks.com/wp-content/uploads/2015/11/drag-drop-upload-2.gif");
   img.style.width = `${w}px`;
   img.style.height = `${h}px`;
   img.style.border = 'none';
+  img.style.cursor = 'pointer';
   img.style.borderRadius = '5px';
-  document.querySelector('#video').appendChild(img);
+
+  document.querySelector('#video').appendChild(label);
+  document.querySelector('#input-file').appendChild(input);
+  document.querySelector('#input-file').appendChild(img);
+
+  document.getElementById("file").addEventListener("change", () => {
+    var get_file = document.getElementById("file")
+    document.getElementById("image").src = URL.createObjectURL(get_file.files[0]);
+  })
 
   var audio = document.createElement("audio");
   audio.setAttribute("src", "Happy Birthday.mp3");
@@ -306,7 +325,7 @@ function reveal() {
   audio.setAttribute("autoplay", "");
   // ifrm.style.width = `${w}px`;
   // ifrm.style.height = `${h}px`;
-  audio.style.opacity = '0';
+  audio.style.display = hidden;
   document.querySelector('#audio').appendChild(audio);
 }
 
